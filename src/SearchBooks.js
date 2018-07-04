@@ -18,13 +18,26 @@ class SearchBooks extends React.Component {
   searchBook = (query) => {
     if (query) {
       BooksAPI.search(query).then(response => {
+        response = this.checkShelf(response)
         this.setState({ response })
+      }).catch(e => {
+        this.setState({ response: []})
       })
-    } else {
-      this.setState({ response: []})
     }
   }
+
+  checkShelf = (response) => {
+    return response.map(book => {
+      const obj = book
+      const Ids = this.props.books.map(book => book.id)
+      if(Ids.includes(obj.id)) {
+        obj.shelf = this.props.books[Ids.indexOf(obj.id)].shelf
+      }
+      return obj
+    })
+  }
   render() {
+    const { moveTo } = this.props
     const { query, response } = this.state
     return (
       <div className="search-books">
@@ -49,7 +62,10 @@ class SearchBooks extends React.Component {
       <div className="search-books-results">
         <ol className="books-grid">
           {response.length > 0 && response.map(book => (
-            <Book key={book.id} book={book} />
+            <Book
+              key={book.id}
+              book={book}
+              moveTo={moveTo} />
           ))}
         </ol>
       </div>
