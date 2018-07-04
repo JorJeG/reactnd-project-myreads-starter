@@ -1,12 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 class Select extends React.Component {
   state = {
-    selected: ''
+    selected: 'none'
   }
 
   componentDidMount() {
-    this.setState({ selected: this.props.book.shelf ? this.props.book.shelf : 'none'})
+    this.setState({ selected: this.props.book.shelf})
   }
 
   handleSelect = (e) => {
@@ -25,6 +26,11 @@ class Select extends React.Component {
       </select>
     )
   }
+}
+
+Select.propTypes = {
+  book: PropTypes.object.isRequired,
+  moveTo: PropTypes.func.isRequired
 }
 
 export default Select
