@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Select from './Select'
 
 const Book = (props) => {
@@ -22,6 +23,11 @@ const Book = (props) => {
       </div>
     </li>
   )
+}
+
+Book.propTypes = {
+  book: PropTypes.object.isRequired,
+  moveTo: PropTypes.func.isRequired
 }
 
 export default Book
