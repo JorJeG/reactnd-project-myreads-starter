@@ -1,4 +1,5 @@
 import React from 'react'
+import Select from './Select'
 
 const Book = (props) => {
   let backgroundImage
@@ -13,13 +14,7 @@ const Book = (props) => {
         <div className="book-top">
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `${backgroundImage}`}}></div>
           <div className="book-shelf-changer">
-            <select>
-              <option value="move" disabled>Move to...</option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
-              <option value="none">None</option>
-            </select>
+            <Select book={props.book} moveTo={props.moveTo} />
           </div>
         </div>
         <div className="book-title">{props.book.title}</div>
