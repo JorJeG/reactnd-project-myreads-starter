@@ -23,6 +23,8 @@ class SearchBooks extends React.Component {
       }).catch(e => {
         this.setState({ response: []})
       })
+    } else {
+      this.setState({ response : []});
     }
   }
 
